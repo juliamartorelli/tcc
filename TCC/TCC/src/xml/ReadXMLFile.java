@@ -9,22 +9,23 @@ import org.w3c.dom.Element;
 import java.io.File;
 import java.util.ArrayList;
 
-
 public class ReadXMLFile {
 	
 	public ArrayList<File> al = new ArrayList<File>();
 	
 	public ArrayList<File> accessDirectory(final File folder) {
 		for (final File fileEntry : folder.listFiles()) {
-	        	accessDirectory(fileEntry);
+	        try {
 	        	al.add(fileEntry);
+	        } catch (Exception e) {
+				  System.out.println("erro: " + e);
+	        }
 	    }	
 		return al;
 	}
 	
 	public void readTheFiles(File fXmlFile){
 	    try {    	    		
-	    	
 	    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	    	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	    	Document doc = dBuilder.parse(fXmlFile);
